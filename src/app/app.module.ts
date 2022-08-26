@@ -5,6 +5,7 @@ import {
   HttpHeaders,
   HttpClientModule,
 } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { HeroImageComponent } from './hero-image/hero-image.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { UsersComponent } from './users/users.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -19,15 +23,24 @@ import { HeroImageComponent } from './hero-image/hero-image.component';
     NavBarComponent,
     HomeComponent,
     HeroImageComponent,
+    CreatePostComponent,
+    UsersComponent,
+    CreateUserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
       { path: 'heroImage', component: HeroImageComponent },
+      { path: 'createPost', component: CreatePostComponent },
+      { path: 'user', component: UsersComponent },
+      { path: 'createUser', component: CreateUserComponent },
+      { path: 'createPost/:ownerId', component: CreatePostComponent },
     ]),
   ],
   providers: [],

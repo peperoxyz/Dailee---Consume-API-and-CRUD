@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { catchError, Observable, pipe, throwError } from 'rxjs';
+import { PostsDataService } from '../services/posts-data.service';
 
 @Component({
   selector: 'app-home',
@@ -7,24 +9,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private http: HttpClient) {}
-
   posts: any;
+  constructor(private postData: PostsDataService) {}
 
-  getPosts() {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
+  onDelete(data: any) {
+    this.postData.deletePost(data).subscribe((result: any) => {
+      this.posts = result.data;
     });
-    const requestOptions = { headers: headers };
-
-    this.http
-      .get('https://dummyapi.io/data/v1/post', requestOptions)
-      .subscribe((posts: any) => {
-        this.posts = posts.data;
-      });
   }
 
+  // ngOnDestroy(): void {
+  //   return this.ngOnInit();
+  // }
+
   ngOnInit(): void {
-    this.getPosts();
+    // this.getPosts();
+    this.postData.getPosts().subscribe((data: any) => {
+      this.posts = data.data;
+    });
   }
 }

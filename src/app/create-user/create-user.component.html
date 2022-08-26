@@ -1,0 +1,69 @@
+<section class="max-w-7xl mx-auto">
+  <div
+    class="px-8 py-5 md:max-w-xl justify-between mx-auto flex gap-5 items-center"
+  >
+    <div class="flex gap-2 items-center">
+      <a [routerLink]="'/user'" class="text-4xl font-extrabold text-blue-600">
+        User
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-7xl md:max-w-xl mx-auto px-8">
+  <form
+    [formGroup]="formCreateUser"
+    (ngSubmit)="onSubmit(formCreateUser.value)"
+  >
+    <div class="mx-auto space-y-5">
+      <div>
+        <label class="font-semibold text-slate-800 text-md" for="text">
+          Add picture URL:
+        </label>
+        <input
+          type="text"
+          formControlName="picture"
+          class="w-full border-2 border-gray-300 p-2 rounded-md"
+        />
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="font-semibold text-slate-800 text-md" for="text">
+            First Name:
+          </label>
+          <input
+            type="text"
+            formControlName="firstName"
+            class="w-full border-2 border-gray-300 p-2 rounded-md"
+            placeholder="Enter Your First Name"
+          />
+        </div>
+        <div>
+          <label class="font-semibold text-slate-800 text-md" for="text">
+            Last Name:
+          </label>
+          <input
+            type="text"
+            class="w-full border-2 border-gray-300 p-2 rounded-md"
+            formControlName="lastName"
+            placeholder="Enter Your Last Name"
+          />
+        </div>
+      </div>
+      <div>
+        <label class="font-semibold text-slate-800 text-md" for="text">
+          Last Name:
+        </label>
+        <input
+          type="text"
+          class="w-full border-2 border-gray-300 p-2 rounded-md"
+          formControlName="email"
+          placeholder="Enter Your Email"
+        />
+      </div>
+      <button class="px-5 py-3 bg-pink-400 rounded-full">
+        <a class="text-2xl text-white font-bold"> Add User 👩🏻‍🚀</a>
+      </button>
+    </div>
+  </form>
+</section>
