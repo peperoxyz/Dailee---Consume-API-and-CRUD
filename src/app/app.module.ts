@@ -16,6 +16,7 @@ import { HeroImageComponent } from './hero-image/hero-image.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { UsersComponent } from './users/users.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { PostOfUserComponent } from './post-of-user/post-of-user.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
     CreatePostComponent,
     UsersComponent,
     CreateUserComponent,
+    PostOfUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,8 +41,10 @@ import { CreateUserComponent } from './create-user/create-user.component';
       { path: 'heroImage', component: HeroImageComponent },
       { path: 'createPost', component: CreatePostComponent },
       { path: 'user', component: UsersComponent },
+      { path: 'home/postOfUser/:ownerId', component: PostOfUserComponent },
       { path: 'createUser', component: CreateUserComponent },
       { path: 'createPost/:ownerId', component: CreatePostComponent },
+      { path: 'postOfUser/:ownerId', component: PostOfUserComponent },
     ]),
   ],
   providers: [],

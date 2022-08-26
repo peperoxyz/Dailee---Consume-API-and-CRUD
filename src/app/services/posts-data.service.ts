@@ -23,7 +23,8 @@ export class PostsDataService {
       'app-id': '63033943889b3aab444829f0',
     });
     const requestOptions = { headers: headers };
-    return this.http.get(this.urlRoot + '/post?created=1', requestOptions);
+    return this.http.get(this.urlRoot + '/post', requestOptions);
+    // return this.http.get(this.urlRoot + '/post?created=1', requestOptions);
   }
 
   savePost(data: any) {
@@ -48,5 +49,16 @@ export class PostsDataService {
     });
     const requestOptions = { headers: headers };
     return this.http.get(this.urlRoot + '/tag?limit=10', requestOptions);
+  }
+
+  getPostOfUser(data: any) {
+    const headers = new HttpHeaders({
+      'app-id': '63033943889b3aab444829f0',
+    });
+    const requestOptions = { headers: headers };
+    return this.http.get(
+      this.urlRoot + '/user/' + data + '/post',
+      requestOptions
+    );
   }
 }
