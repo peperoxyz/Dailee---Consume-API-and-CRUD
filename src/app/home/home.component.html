@@ -69,7 +69,12 @@
             </div>
           </a>
         </div>
-        <span (click)="onDelete(post.id)" class="text-xl">🗑️</span>
+        <div class="flex">
+          <span [routerLink]="['detailPost/', post.id]" class="text-xl"
+            >➡️</span
+          >
+          <span (click)="onDelete(post.id)" class="text-xl">🗑️</span>
+        </div>
       </div>
       <div class="space-y-1">
         <h1>{{ post.text }}</h1>

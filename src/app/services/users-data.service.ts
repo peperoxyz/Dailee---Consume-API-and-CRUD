@@ -14,7 +14,7 @@ export class UsersDataService {
       'app-id': '63033943889b3aab444829f0',
     });
     const requestOptions = { headers: headers };
-    return this.http.get(this.urlRoot + '/user', requestOptions);
+    return this.http.get(this.urlRoot + '/user?created=1', requestOptions);
   }
 
   saveUser(data: any) {

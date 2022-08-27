@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { catchError, Observable, pipe, throwError } from 'rxjs';
 import { UsersDataService } from '../services/users-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +13,7 @@ import { UsersDataService } from '../services/users-data.service';
 export class UsersComponent implements OnInit {
   users: any;
 
-  constructor(private userData: UsersDataService) {}
+  constructor(private userData: UsersDataService, private router: Router) {}
 
   ngOnInit(): void {
     this.userData.getUsers().subscribe((data: any) => {
@@ -23,6 +24,7 @@ export class UsersComponent implements OnInit {
   onDelete(data: any) {
     this.userData.deleteUser(data).subscribe((result: any) => {
       this.users = result.data;
+      this.router.navigate(['user']);
     });
   }
 }

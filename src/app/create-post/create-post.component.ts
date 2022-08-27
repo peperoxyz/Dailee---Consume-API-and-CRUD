@@ -22,14 +22,12 @@ export class CreatePostComponent implements OnInit {
   tags: string[] = [];
   ownerId: string = '';
   selectedTag: string[] = [];
+  postId: string = '';
 
   formCreatePost = new FormGroup({
     image: new FormControl(''),
     text: new FormControl(''),
-    tag: new FormArray([
-      new FormControl('hello world'),
-      new FormControl('halo dunia tipu-tipu'),
-    ]),
+    tag: new FormArray([new FormControl(), new FormControl()]),
     owner: new FormControl(''),
     likes: new FormControl('0'),
   });
@@ -54,9 +52,9 @@ export class CreatePostComponent implements OnInit {
     });
   }
 
-  addToTag(selectedTag: any) {
-    this.selectedTag = selectedTag;
-    this.formCreatePost.controls['tag'].setValue(this.selectedTag);
+  addToTag(selectedTag: string) {
+    this.selectedTag.push(selectedTag);
+    this.formCreatePost.controls['tag'].patchValue(this.selectedTag);
   }
 
   selectedUser(userId: string) {
@@ -64,13 +62,12 @@ export class CreatePostComponent implements OnInit {
     this.formCreatePost.controls['owner'].setValue(this.ownerId);
   }
 
-  onSubmit(data: any) {
-    console.warn(this.selectedTag);
-    console.warn(this.ownerId);
-
-    this.postData.savePost(data).subscribe((result: any) => {
-      this.posts = result.data;
-      console.warn(this.posts);
-    });
+  onSubmit() {
+    this.postData
+      .savePost(this.formCreatePost.value)
+      .subscribe((result: any) => {
+        this.posts = result.data;
+        console.warn(this.posts);
+      });
   }
 }

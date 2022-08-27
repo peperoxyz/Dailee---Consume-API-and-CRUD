@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, Observable, pipe, throwError } from 'rxjs';
 import { PostsDataService } from '../services/posts-data.service';
 
@@ -10,11 +11,12 @@ import { PostsDataService } from '../services/posts-data.service';
 })
 export class HomeComponent implements OnInit {
   posts: any;
-  constructor(private postData: PostsDataService) {}
+  constructor(private postData: PostsDataService, private router: Router) {}
 
   onDelete(data: any) {
     this.postData.deletePost(data).subscribe((result: any) => {
       this.posts = result.data;
+      this.router.navigate(['home']);
     });
   }
 

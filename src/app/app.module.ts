@@ -17,6 +17,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { UsersComponent } from './users/users.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { PostOfUserComponent } from './post-of-user/post-of-user.component';
+import { DetailPostsComponent } from './detail-posts/detail-posts.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PostOfUserComponent } from './post-of-user/post-of-user.component';
     UsersComponent,
     CreateUserComponent,
     PostOfUserComponent,
+    DetailPostsComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,10 @@ import { PostOfUserComponent } from './post-of-user/post-of-user.component';
       { path: 'createUser', component: CreateUserComponent },
       { path: 'createPost/:ownerId', component: CreatePostComponent },
       { path: 'postOfUser/:ownerId', component: PostOfUserComponent },
+      {
+        path: 'home/detailPost/:postId',
+        component: DetailPostsComponent,
+      },
     ]),
   ],
   providers: [],

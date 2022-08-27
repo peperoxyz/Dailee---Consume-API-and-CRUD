@@ -10,11 +10,7 @@
   </div>
 </section>
 <section class="max-w-7xl md:max-w-xl mx-auto px-8">
-  <form
-    [formGroup]="formCreatePost"
-    (ngSubmit)="onSubmit(formCreatePost.value)"
-    class="space-y-5"
-  >
+  <form [formGroup]="formCreatePost" (ngSubmit)="onSubmit()" class="space-y-5">
     <div class="mx-auto space-y-5">
       <div class="">
         <label

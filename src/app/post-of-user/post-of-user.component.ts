@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PostsDataService } from '../services/posts-data.service';
 import { UsersDataService } from '../services/users-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-of-user',
@@ -17,7 +17,8 @@ export class PostOfUserComponent implements OnInit {
   constructor(
     private userData: UsersDataService,
     private postData: PostsDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   getPostOfUser(data: any) {
@@ -29,6 +30,7 @@ export class PostOfUserComponent implements OnInit {
   onDelete(data: any) {
     this.postData.deletePost(data).subscribe((result: any) => {
       this.posts = result.data;
+      this.router.navigate(['user/' + this.ownerId]);
     });
   }
 
@@ -38,5 +40,6 @@ export class PostOfUserComponent implements OnInit {
     this.ownerId = String(routeParams.get('ownerId'));
 
     this.getPostOfUser(this.ownerId);
+    console.log(this.posts);
   }
 }
