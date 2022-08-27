@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   onDelete(data: any) {
     this.postData.deletePost(data).subscribe((result: any) => {
       this.posts = result.data;
-      this.router.navigate(['home']);
+      this.router.navigate(['/']);
     });
   }
 

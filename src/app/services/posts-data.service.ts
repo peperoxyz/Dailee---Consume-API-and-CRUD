@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-/**
- * susun deklarasi
- * get data lama
- * isi data lama
- * ubah data lama
- * kirim ke api
- */
-
 @Injectable({
   providedIn: 'root',
 })

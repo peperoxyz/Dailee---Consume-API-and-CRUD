@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 import { catchError, Observable, pipe, throwError } from 'rxjs';
 import { UsersDataService } from '../services/users-data.service';
 
@@ -19,7 +20,7 @@ export class CreateUserComponent implements OnInit {
     picture: new FormControl(''),
   });
 
-  constructor(private userData: UsersDataService) {}
+  constructor(private userData: UsersDataService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -27,6 +28,7 @@ export class CreateUserComponent implements OnInit {
     this.userData.saveUser(data).subscribe((result: any) => {
       console.warn(result);
       this.formCreateUser.reset();
+      this.router.navigate(['home']);
     });
   }
 }

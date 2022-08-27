@@ -6,7 +6,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, pipe, throwError } from 'rxjs';
 import { PostsDataService } from '../services/posts-data.service';
 import { UsersDataService } from '../services/users-data.service';
@@ -35,7 +35,8 @@ export class CreatePostComponent implements OnInit {
   constructor(
     private postData: PostsDataService,
     private userData: UsersDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +69,8 @@ export class CreatePostComponent implements OnInit {
       .subscribe((result: any) => {
         this.posts = result.data;
         console.warn(this.posts);
+        // this.formCreatePost.reset();
+        this.router.navigate(['home']);
       });
   }
 }

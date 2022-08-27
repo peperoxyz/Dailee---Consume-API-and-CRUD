@@ -31,6 +31,6 @@ export class DetailPostsComponent implements OnInit {
     this.postId = String(routeParams.get('postId'));
 
     this.getPostById(this.postId);
-    console.log(this.postById);
+    window.alert(this.postById);
   }
 }
