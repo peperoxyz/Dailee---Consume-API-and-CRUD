@@ -19,6 +19,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { PostOfUserComponent } from './post-of-user/post-of-user.component';
 import { DetailPostsComponent } from './detail-posts/detail-posts.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     PostOfUserComponent,
     DetailPostsComponent,
     UpdateUserComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,16 +43,22 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'home', component: HomeComponent },
       { path: 'heroImage', component: HeroImageComponent },
       { path: 'createPost', component: CreatePostComponent },
       { path: 'user', component: UsersComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'home/postOfUser/:ownerId', component: PostOfUserComponent },
+      { path: 'home/detailPost/:postId', component: DetailPostsComponent },
       { path: 'createUser', component: CreateUserComponent },
       { path: 'createPost/:ownerId', component: CreatePostComponent },
       { path: 'postOfUser/:ownerId', component: PostOfUserComponent },
+      { path: 'postOfUser/updateUser/:userId', component: UpdateUserComponent },
       { path: 'updateUser/:userId', component: UpdateUserComponent },
-      { path: 'home/detailPost/:postId', component: DetailPostsComponent },
+      { path: 'detailPost/:postId', component: DetailPostsComponent },
+      {
+        path: 'home/postOfUser/:userId/detailPost/:postId',
+        component: DetailPostsComponent,
+      },
     ]),
   ],
   providers: [],

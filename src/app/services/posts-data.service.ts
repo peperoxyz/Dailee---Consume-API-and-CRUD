@@ -16,7 +16,7 @@ export class PostsDataService {
     });
     const requestOptions = { headers: headers };
     // return this.http.get(this.urlRoot + '/post', requestOptions);
-    return this.http.get(this.urlRoot + '/post?created=1', requestOptions);
+    return this.http.get(this.urlRoot + '/post', requestOptions);
   }
 
   // get post by id
@@ -26,6 +26,25 @@ export class PostsDataService {
     });
     const requestOptions = { headers: headers };
     return this.http.get(this.urlRoot + '/post/' + data, requestOptions);
+  }
+
+  getCommentsOfPost(data: any) {
+    const headers = new HttpHeaders({
+      'app-id': '63033943889b3aab444829f0',
+    });
+    const requestOptions = { headers: headers };
+    return this.http.get(
+      this.urlRoot + '/post/' + data + '/comment',
+      requestOptions
+    );
+  }
+
+  getComments() {
+    const headers = new HttpHeaders({
+      'app-id': '63033943889b3aab444829f0',
+    });
+    const requestOptions = { headers: headers };
+    return this.http.get(this.urlRoot + '/comment', requestOptions);
   }
 
   savePost(data: any) {

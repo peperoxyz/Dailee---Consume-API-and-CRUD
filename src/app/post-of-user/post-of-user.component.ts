@@ -24,6 +24,7 @@ export class PostOfUserComponent implements OnInit {
   getPostOfUser(data: any) {
     this.postData.getPostOfUser(this.ownerId).subscribe((result: any) => {
       this.posts = result.data;
+      console.warn(this.posts);
     });
   }
 

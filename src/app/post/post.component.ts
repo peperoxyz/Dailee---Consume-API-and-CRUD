@@ -5,11 +5,11 @@ import { catchError, Observable, pipe, throwError } from 'rxjs';
 import { PostsDataService } from '../services/posts-data.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-post',
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class PostComponent implements OnInit {
   posts: any;
   constructor(private postData: PostsDataService, private router: Router) {}
 

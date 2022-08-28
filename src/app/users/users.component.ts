@@ -18,13 +18,18 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.userData.getUsers().subscribe((data: any) => {
       this.users = data.data;
+      // console.warn(this.users);
     });
   }
 
   onDelete(data: any) {
-    this.userData.deleteUser(data).subscribe((result: any) => {
-      this.users = result.data;
-      this.router.navigate(['user']);
-    });
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.userData.deleteUser(data).subscribe((result: any) => {
+        this.users = result.data;
+        this.router.navigate(['/user']);
+      });
+    } else {
+      this.router.navigate(['/user']);
+    }
   }
 }

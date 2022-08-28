@@ -18,19 +18,19 @@ import { UsersDataService } from '../services/users-data.service';
 })
 export class UpdateUserComponent implements OnInit {
   userId?: string | null;
+  oldData: any = {};
 
   formUpdateUser = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
+    picture: new FormControl(''),
   });
 
   constructor(
     private route: ActivatedRoute,
     private userData: UsersDataService,
     private router: Router
-  ) {
-    this.userId = this.route.snapshot.paramMap.get('userId');
-  }
+  ) {}
 
   onSubmit() {
     this.userData
@@ -43,11 +43,13 @@ export class UpdateUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    window.alert('User id: ' + this.userId);
-    this.userData.getOldDataUser(this.userId).subscribe((result: any) => {
+    this.userId = this.route.snapshot.paramMap.get('userId');
+    this.userData.getUsers().subscribe((result: any) => {
+      this.oldData = result.data.find((item: any) => item.id == this.userId);
       this.formUpdateUser.patchValue({
-        firstName: result.data.firstName,
-        lastName: result.data.lastName,
+        firstName: this.oldData.firstName,
+        lastName: this.oldData.lastName,
+        picture: this.oldData.picture,
       });
     });
   }

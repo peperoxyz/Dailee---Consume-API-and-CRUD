@@ -28,7 +28,7 @@ export class CreateUserComponent implements OnInit {
     this.userData.saveUser(data).subscribe((result: any) => {
       console.warn(result);
       this.formCreateUser.reset();
-      this.router.navigate(['home']);
+      this.router.navigate(['user']);
     });
   }
 }

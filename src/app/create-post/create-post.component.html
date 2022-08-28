@@ -43,6 +43,7 @@
           <div *ngFor="let tag of tags">
             <h1
               (click)="addToTag(tag)"
+              formArrayName="tags"
               class="px-3 py-3 bg-pink-100 text-center rounded-full hover:bg-pink-400 hover:text-white"
             >
               {{ tag }}
@@ -73,7 +74,7 @@
         ></textarea>
       </div>
 
-      <input type="text" hidden formArrayName="tag" />
+      <!-- <input type="text" hidden formArrayName="tag" /> -->
       <input type="text" hidden formControlName="owner" />
 
       <button class="px-5 py-3 bg-pink-400 rounded-full">
