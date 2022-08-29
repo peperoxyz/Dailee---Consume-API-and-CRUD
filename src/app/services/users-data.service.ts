@@ -17,6 +17,14 @@ export class UsersDataService {
     return this.http.get(this.urlRoot + '/user?created=1', requestOptions);
   }
 
+  getUserById(data: any) {
+    const headers = new HttpHeaders({
+      'app-id': '63033943889b3aab444829f0',
+    });
+    const requestOptions = { headers: headers };
+    return this.http.get(this.urlRoot + '/user/' + data, requestOptions);
+  }
+
   getOldDataUser(data: any) {
     const headers = new HttpHeaders({
       'app-id': '63033943889b3aab444829f0',

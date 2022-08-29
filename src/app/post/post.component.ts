@@ -11,7 +11,17 @@ import { PostsDataService } from '../services/posts-data.service';
 })
 export class PostComponent implements OnInit {
   posts: any;
+  commentsByPost: any;
+  postId?: string | null;
   constructor(private postData: PostsDataService, private router: Router) {}
+
+  getCommentsOfPost(data: any) {
+    this.postData.getCommentsOfPost(this.postId).subscribe((result: any) => {
+      this.commentsByPost = result.data;
+      console.warn(this.postId);
+      console.warn(this.commentsByPost);
+    });
+  }
 
   onDelete(data: any) {
     if (confirm('Are you sure you want to delete this user?')) {

@@ -21,8 +21,9 @@ export class CreatePostComponent implements OnInit {
   users: any;
   tags: string[] = [];
   ownerId: string = '';
-  selectedTag: string[] = [];
+  selectedTags: string[] = [];
   postId: string = '';
+  foo: any;
 
   formCreatePost = new FormGroup({
     image: new FormControl(''),
@@ -54,8 +55,16 @@ export class CreatePostComponent implements OnInit {
   }
 
   addToTag(selectedTag: string) {
-    this.selectedTag.push(selectedTag);
-    this.formCreatePost.controls['tags'].patchValue(this.selectedTag);
+    this.selectedTags.push(selectedTag);
+    this.formCreatePost.controls['tags'].patchValue(this.selectedTags);
+    this.foo = (this.formCreatePost.value.tags);
+    console.warn(this.foo)
+  }
+
+  onReset(){
+    this.formCreatePost.value.tags = [];
+    this.formCreatePost.controls['tags'].patchValue(this.foo);
+    console.log(this.foo)
   }
 
   selectedUser(userId: string) {
@@ -68,9 +77,9 @@ export class CreatePostComponent implements OnInit {
       .savePost(this.formCreatePost.value)
       .subscribe((result: any) => {
         this.posts = result.data;
-        this.router.navigate(['home']);
         console.warn(this.formCreatePost.value);
-        // this.formCreatePost.reset();
+        this.formCreatePost.reset();
+        this.router.navigate(['home']);
       });
   }
 }

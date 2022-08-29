@@ -55,6 +55,14 @@ export class PostsDataService {
     return this.http.post(this.urlRoot + '/post/create', data, requestOptions);
   }
 
+  saveComment(data: any) {
+    const headers = new HttpHeaders({
+      'app-id': '63033943889b3aab444829f0',
+    });
+    const requestOptions = { headers: headers };
+    return this.http.post(this.urlRoot + '/comment/create', data, requestOptions);
+  }
+
   deletePost(data: any) {
     const headers = new HttpHeaders({
       'app-id': '63033943889b3aab444829f0',

@@ -14,17 +14,20 @@ export class DetailPostsComponent implements OnInit {
   postId?: string | null;
   comments: any;
   commentsByPost: any;
+  users: any;
+  ownerId: string = '';
 
   formCreateComment = new FormGroup({
     message: new FormControl(''),
-    owner: new FormControl(''),
+    owner: new FormControl('60d0fe4f5311236168a109e2'),
     post: new FormControl(''),
   });
 
   constructor(
     private postData: PostsDataService,
     private userData: UsersDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   getPostById(data: any) {
@@ -47,11 +50,31 @@ export class DetailPostsComponent implements OnInit {
       console.warn(this.commentsByPost);
     });
   }
+  selectedUser(userId: string) {
+    this.ownerId = userId;
+    this.formCreateComment.controls['owner'].setValue(this.ownerId);
+  }
+
+  onSubmit() {
+    this.postData
+      .saveComment(this.formCreateComment.value)
+      .subscribe((result: any) => {
+        this.comments = result.data;
+      });
+    this.formCreateComment.reset();
+    this.router.navigate(['/']);
+    // this.router.navigate(['home/detailPost/', this.postId]);
+  }
 
   ngOnInit(): void {
+    this.userData.getUsers().subscribe((data: any) => {
+      this.users = data.data;
+    });
+
     // get post id from param
     const routeParams = this.route.snapshot.paramMap;
     this.postId = String(routeParams.get('postId'));
+    this.formCreateComment.patchValue({ post: this.postId });
     // load posts by id in param
     this.getPostById(this.postId);
     this.getCommentsOfPost(this.postId);

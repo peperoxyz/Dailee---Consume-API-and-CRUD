@@ -33,11 +33,15 @@
       </div>
 
       <div>
-        <label class="font-semibold text-slate-800 text-md" for="text">
-          Select Tags:
-          <span *ngIf="selectedTag" class="text-xs text-pink-400">{{
-            selectedTag
-          }}</span>
+        <label
+          class="flex items-center font-semibold text-slate-800 text-md"
+          for="text"
+        >
+          Select Tags(max 2):
+          <span *ngFor="let foo of foo" class="text-xs text-pink-400 ml-2">
+            #{{ foo }}</span
+          >
+          <span class="right-0" (click)="onReset()"></span>
         </label>
         <div class="flex flex-wrap gap-2">
           <div *ngFor="let tag of tags">
