@@ -24,6 +24,7 @@ export class CreatePostComponent implements OnInit {
   selectedTags: string[] = [];
   postId: string = '';
   foo: any;
+  bar: any;
 
   formCreatePost = new FormGroup({
     image: new FormControl(''),
@@ -57,19 +58,20 @@ export class CreatePostComponent implements OnInit {
   addToTag(selectedTag: string) {
     this.selectedTags.push(selectedTag);
     this.formCreatePost.controls['tags'].patchValue(this.selectedTags);
-    this.foo = (this.formCreatePost.value.tags);
-    console.warn(this.foo)
+    this.foo = this.formCreatePost.value.tags;
+    console.warn(this.foo);
   }
 
-  onReset(){
+  onReset() {
     this.formCreatePost.value.tags = [];
     this.formCreatePost.controls['tags'].patchValue(this.foo);
-    console.log(this.foo)
+    console.log(this.foo);
   }
 
   selectedUser(userId: string) {
     this.ownerId = userId;
     this.formCreatePost.controls['owner'].setValue(this.ownerId);
+    this.bar = this.formCreatePost.value.owner
   }
 
   onSubmit() {

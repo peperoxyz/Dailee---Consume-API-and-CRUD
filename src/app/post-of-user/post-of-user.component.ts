@@ -49,7 +49,7 @@ export class PostOfUserComponent implements OnInit {
   onDelete(data: any) {
     this.postData.deletePost(data).subscribe((result: any) => {
       this.posts = result.data;
-      this.router.navigate(['user/' + this.ownerId]);
+      // this.router.navigate(['user/' + this.ownerId]);
     });
   }
 

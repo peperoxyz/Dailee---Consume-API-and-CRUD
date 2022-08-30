@@ -42,8 +42,7 @@ export class UpdateUserComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-    this.userId = this.route.snapshot.paramMap.get('userId');
+  getOldData(){
     this.userData.getUsers().subscribe((result: any) => {
       this.oldData = result.data.find((item: any) => item.id == this.userId);
       this.formUpdateUser.patchValue({
@@ -52,5 +51,10 @@ export class UpdateUserComponent implements OnInit {
         picture: this.oldData.picture,
       });
     });
+  }
+
+  ngOnInit(): void {
+    this.userId = this.route.snapshot.paramMap.get('userId');
+    this.getOldData();
   }
 }

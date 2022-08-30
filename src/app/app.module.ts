@@ -20,6 +20,7 @@ import { PostOfUserComponent } from './post-of-user/post-of-user.component';
 import { DetailPostsComponent } from './detail-posts/detail-posts.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { PostComponent } from './post/post.component';
+import { UpdatePostComponent } from './update-post/update-post.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { PostComponent } from './post/post.component';
     DetailPostsComponent,
     UpdateUserComponent,
     PostComponent,
+    UpdatePostComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +61,7 @@ import { PostComponent } from './post/post.component';
         path: 'home/postOfUser/:userId/detailPost/:postId',
         component: DetailPostsComponent,
       },
+      { path: 'updatePost/:postId', component: UpdatePostComponent },
     ]),
   ],
   providers: [],

@@ -50,9 +50,21 @@ export class DetailPostsComponent implements OnInit {
       console.warn(this.commentsByPost);
     });
   }
+
   selectedUser(userId: string) {
     this.ownerId = userId;
     this.formCreateComment.controls['owner'].setValue(this.ownerId);
+  }
+
+  onDelete(postId: any) {
+    if (confirm('Are you sure you want to delete this post?')) {
+      this.postData.deletePost(postId).subscribe((result: any) => {
+        this.users = result.data;
+        // this.router.navigate(['/user']);
+      });
+    } else {
+      // this.router.navigate(['/user']);
+    }
   }
 
   onSubmit() {
@@ -62,8 +74,9 @@ export class DetailPostsComponent implements OnInit {
         this.comments = result.data;
       });
     this.formCreateComment.reset();
-    this.router.navigate(['/']);
-    // this.router.navigate(['home/detailPost/', this.postId]);
+    this.router.navigate(['home/detailPost/', this.postId]);
+    console.warn(this.postId)
+    // this.router.navigate(['/user']);
   }
 
   ngOnInit(): void {
