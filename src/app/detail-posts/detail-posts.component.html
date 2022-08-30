@@ -120,11 +120,14 @@
       <div class="bg-white mb-2 p-3 rounded-lg shadow-sm">
         <div class="flex gap-2">
           <img
+            [routerLink]="['/postOfUser/', comment.owner.id]"
             [src]="comment.owner.picture"
             class="rounded-full h-5 w-5"
             alt=""
           />
-          <span class="font-bold text-xs"
+          <span
+            class="font-bold text-xs cursor-pointer"
+            [routerLink]="['/postOfUser/', comment.owner.id]"
             >{{ comment.owner.firstName }} {{ comment.owner.lastName }}</span
           >
         </div>

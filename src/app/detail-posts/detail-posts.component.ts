@@ -19,7 +19,7 @@ export class DetailPostsComponent implements OnInit {
 
   formCreateComment = new FormGroup({
     message: new FormControl(''),
-    owner: new FormControl('60d0fe4f5311236168a109e2'),
+    owner: new FormControl(''),
     post: new FormControl(''),
   });
 
