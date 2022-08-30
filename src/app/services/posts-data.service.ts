@@ -55,12 +55,16 @@ export class PostsDataService {
     return this.http.post(this.urlRoot + '/post/create', data, requestOptions);
   }
 
-  updatePost(postId: any, data:any) {
+  updatePost(postId: any, data: any) {
     const headers = new HttpHeaders({
       'app-id': '63033943889b3aab444829f0',
     });
     const requestOptions = { headers: headers };
-    return this.http.put(this.urlRoot + '/post/' + postId, data, requestOptions);
+    return this.http.put(
+      this.urlRoot + '/post/' + postId,
+      data,
+      requestOptions
+    );
   }
 
   saveComment(data: any) {
@@ -68,8 +72,21 @@ export class PostsDataService {
       'app-id': '63033943889b3aab444829f0',
     });
     const requestOptions = { headers: headers };
-    return this.http.post(this.urlRoot + '/comment/create', data, requestOptions);
+    return this.http.post(
+      this.urlRoot + '/comment/create',
+      data,
+      requestOptions
+    );
   }
+
+  // updateLikes(postId: any, data: any) {
+  //   const headers = new HttpHeaders({
+  //     'app-id': '63033943889b3aab444829f0',
+  //   });
+  //   const requestOptions = { headers: headers };
+  //   return this.http.put(this.urlRoot + '/post/' + postId, data, requestOptions
+  //   );
+  // }
 
   deletePost(data: any) {
     const headers = new HttpHeaders({

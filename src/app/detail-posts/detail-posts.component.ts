@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -39,15 +40,13 @@ export class DetailPostsComponent implements OnInit {
   getComments() {
     this.postData.getComments().subscribe((result: any) => {
       this.comments = result.data;
-      console.warn(this.comments);
     });
   }
+
 
   getCommentsOfPost(data: any) {
     this.postData.getCommentsOfPost(this.postId).subscribe((result: any) => {
       this.commentsByPost = result.data;
-      console.warn(this.postId);
-      console.warn(this.commentsByPost);
     });
   }
 
@@ -73,10 +72,10 @@ export class DetailPostsComponent implements OnInit {
       .subscribe((result: any) => {
         this.comments = result.data;
       });
-    this.formCreateComment.reset();
-    this.router.navigate(['home/detailPost/', this.postId]);
-    console.warn(this.postId)
-    // this.router.navigate(['/user']);
+    this.getCommentsOfPost(this.postId);
+    // this.formCreateComment.reset();
+    // this.formCreateComment.patchValue({ post: this.postId });
+    this.formCreateComment.get('message')?.reset();
   }
 
   ngOnInit(): void {

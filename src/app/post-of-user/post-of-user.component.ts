@@ -26,36 +26,29 @@ export class PostOfUserComponent implements OnInit {
   getPostOfUser(data: any) {
     this.postData.getPostOfUser(this.ownerId).subscribe((result: any) => {
       this.posts = result.data;
-      console.warn(this.posts);
-    });
-  }
-
-  getUserFromRoute(data: any) {
-    this.userData.getUsers().subscribe((result: any) => {
-      this.users = result.data.find((x: any) => x.id === data);
-      console.warn(this.users);
     });
   }
 
   // try get user by id
   getUserById(data: any) {
     this.userData.getUserById(this.ownerId).subscribe((result: any) => {
-      console.warn(result);
       this.users = result;
-      console.warn(this.users);
     });
   }
 
   onDelete(data: any) {
-    this.postData.deletePost(data).subscribe((result: any) => {
-      this.posts = result.data;
-      // this.router.navigate(['user/' + this.ownerId]);
-    });
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.postData.deletePost(data).subscribe((result: any) => {
+        this.posts = result.data;
+        this.router.navigate(['/user']);
+      });
+    }
   }
 
   onClick(data: any) {
     this.router.navigate(['home/detailPost/' + data]);
   }
+
 
   ngOnInit(): void {
     // Get the user id from the current route
@@ -67,8 +60,15 @@ export class PostOfUserComponent implements OnInit {
     this.postId = String(routeParamsP.get('postId'));
 
     this.getPostOfUser(this.ownerId);
-    this.getUserFromRoute(this.ownerId);
     this.getUserById(this.ownerId);
     console.log(this.posts);
   }
 }
+
+/**
+ * klik icon hati
+ * dapetin semua data post detail
+ * jadiin itu body di request update nya
+ * ambil likes, ubah ke number, tambahkan 1, kembalikan ke string
+ * kirim ke server
+ */

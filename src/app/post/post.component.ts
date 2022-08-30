@@ -18,8 +18,6 @@ export class PostComponent implements OnInit {
   getCommentsOfPost(data: any) {
     this.postData.getCommentsOfPost(this.postId).subscribe((result: any) => {
       this.commentsByPost = result.data;
-      console.warn(this.postId);
-      console.warn(this.commentsByPost);
     });
   }
 

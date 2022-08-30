@@ -51,8 +51,9 @@ export class UpdatePostComponent implements OnInit {
     this.selectedTags.push(selectedTag);
     this.formUpdatePost.controls['tags'].patchValue(this.selectedTags);
     this.foo = this.formUpdatePost.value.tags;
-    console.warn(this.foo);
   }
+
+
 
   onSubmit() {
     this.postData

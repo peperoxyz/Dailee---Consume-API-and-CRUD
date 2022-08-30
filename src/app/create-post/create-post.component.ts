@@ -59,7 +59,6 @@ export class CreatePostComponent implements OnInit {
     this.selectedTags.push(selectedTag);
     this.formCreatePost.controls['tags'].patchValue(this.selectedTags);
     this.foo = this.formCreatePost.value.tags;
-    console.warn(this.foo);
   }
 
   onReset() {
@@ -79,7 +78,6 @@ export class CreatePostComponent implements OnInit {
       .savePost(this.formCreatePost.value)
       .subscribe((result: any) => {
         this.posts = result.data;
-        console.warn(this.formCreatePost.value);
         this.formCreatePost.reset();
         this.router.navigate(['home']);
       });

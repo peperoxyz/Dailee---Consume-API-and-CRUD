@@ -36,7 +36,6 @@ export class UpdateUserComponent implements OnInit {
     this.userData
       .updateUser(this.userId, this.formUpdateUser.value)
       .subscribe((result: any) => {
-        console.warn(result);
         this.formUpdateUser.reset();
         this.router.navigate(['user']);
       });
