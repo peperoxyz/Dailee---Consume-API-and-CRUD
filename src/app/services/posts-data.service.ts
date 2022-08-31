@@ -7,114 +7,81 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class PostsDataService {
   tags: any;
   urlRoot = 'https://dummyapi.io/data/v1';
+  headers = new HttpHeaders({
+    'app-id': '63033943889b3aab444829f0',
+  });
+  requestOptions = { headers: this.headers };
 
   constructor(private http: HttpClient) {}
 
   getPosts() {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
     // return this.http.get(this.urlRoot + '/post', requestOptions);
-    return this.http.get(this.urlRoot + '/post?created=1', requestOptions);
+    return this.http.get(this.urlRoot + '/post?created=1', this.requestOptions);
   }
 
   // get post by id
   getPostById(data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
-    return this.http.get(this.urlRoot + '/post/' + data, requestOptions);
+    return this.http.get(this.urlRoot + '/post/' + data, this.requestOptions);
   }
 
   getCommentsOfPost(data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
     return this.http.get(
       this.urlRoot + '/post/' + data + '/comment',
-      requestOptions
+      this.requestOptions
     );
   }
 
   getComments() {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
-    return this.http.get(this.urlRoot + '/comment', requestOptions);
+    return this.http.get(this.urlRoot + '/comment', this.requestOptions);
   }
 
   savePost(data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
-    return this.http.post(this.urlRoot + '/post/create', data, requestOptions);
+    return this.http.post(
+      this.urlRoot + '/post/create',
+      data,
+      this.requestOptions
+    );
   }
 
   updatePost(postId: any, data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
     return this.http.put(
       this.urlRoot + '/post/' + postId,
       data,
-      requestOptions
+      this.requestOptions
     );
   }
 
   likePost(postId: any, data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
     return this.http.put(
       this.urlRoot + '/post/' + postId,
       data,
-      requestOptions
+      this.requestOptions
     );
   }
 
   saveComment(data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
     return this.http.post(
       this.urlRoot + '/comment/create',
       data,
-      requestOptions
+      this.requestOptions
     );
   }
 
   deletePost(data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
-    return this.http.delete(this.urlRoot + '/post/' + data, requestOptions);
+    return this.http.delete(
+      this.urlRoot + '/post/' + data,
+      this.requestOptions
+    );
   }
 
   getTags() {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
-    return this.http.get(this.urlRoot + '/tag?limit=10', requestOptions);
+    return this.http.get(this.urlRoot + '/tag?limit=10', this.requestOptions);
   }
 
   getPostOfUser(data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
     return this.http.get(
       this.urlRoot + '/user/' + data + '/post',
-      requestOptions
+      this.requestOptions
     );
   }
 }

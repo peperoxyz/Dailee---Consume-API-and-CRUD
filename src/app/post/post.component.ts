@@ -39,10 +39,9 @@ export class PostComponent implements OnInit {
     if (confirm('Are you sure you want to delete this user?')) {
       this.postData.deletePost(data).subscribe((result: any) => {
         this.posts = result.data;
-        // this.router.navigate(['/']);
+        this.postData.getPosts();
+        window.location.reload()
       });
-    } else {
-      // this.router.navigate(['/']);
     }
   }
 

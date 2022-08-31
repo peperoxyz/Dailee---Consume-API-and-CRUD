@@ -5,6 +5,7 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, pipe, throwError } from 'rxjs';
@@ -17,8 +18,8 @@ import { UsersDataService } from '../services/users-data.service';
   styleUrls: ['./create-post.component.css'],
 })
 export class CreatePostComponent implements OnInit {
-  posts: any;
-  users: any;
+  posts: any = {};
+  users: any = {};
   tags: string[] = [];
   ownerId: string = '';
   selectedTags: string[] = [];
@@ -28,11 +29,17 @@ export class CreatePostComponent implements OnInit {
 
   formCreatePost = new FormGroup({
     image: new FormControl(''),
-    text: new FormControl(''),
+    text: new FormControl('', Validators.required),
     tags: new FormArray([new FormControl(), new FormControl()]),
-    owner: new FormControl(''),
+    owner: new FormControl('', Validators.required),
     likes: new FormControl('0'),
   });
+
+  submitted = false;
+
+  get f() {
+    return this.formCreatePost.controls;
+  }
 
   constructor(
     private postData: PostsDataService,
@@ -70,10 +77,11 @@ export class CreatePostComponent implements OnInit {
   selectedUser(userId: string) {
     this.ownerId = userId;
     this.formCreatePost.controls['owner'].setValue(this.ownerId);
-    this.bar = this.formCreatePost.value.owner
+    this.bar = this.formCreatePost.value.owner;
   }
 
   onSubmit() {
+    this.submitted = true;
     this.postData
       .savePost(this.formCreatePost.value)
       .subscribe((result: any) => {

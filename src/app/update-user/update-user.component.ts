@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersDataService } from '../services/users-data.service';
 
@@ -21,10 +21,16 @@ export class UpdateUserComponent implements OnInit {
   oldData: any = {};
 
   formUpdateUser = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
     picture: new FormControl(''),
   });
+
+  submitted = false;
+
+  get f() {
+    return this.formUpdateUser.controls;
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +39,7 @@ export class UpdateUserComponent implements OnInit {
   ) {}
 
   onSubmit() {
+    this.submitted = true;
     this.userData
       .updateUser(this.userId, this.formUpdateUser.value)
       .subscribe((result: any) => {
@@ -41,7 +48,7 @@ export class UpdateUserComponent implements OnInit {
       });
   }
 
-  getOldData(){
+  getOldData() {
     this.userData.getUsers().subscribe((result: any) => {
       this.oldData = result.data.find((item: any) => item.id == this.userId);
       this.formUpdateUser.patchValue({

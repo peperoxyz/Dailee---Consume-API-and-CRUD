@@ -6,58 +6,45 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UsersDataService {
   urlRoot = 'https://dummyapi.io/data/v1';
+  headers = new HttpHeaders({
+    'app-id': '63033943889b3aab444829f0',
+  });
+  requestOptions = { headers: this.headers };
 
   constructor(private http: HttpClient) {}
 
   getUsers() {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
-    return this.http.get(this.urlRoot + '/user?created=1', requestOptions);
+    return this.http.get(this.urlRoot + '/user?created=1', this.requestOptions);
   }
 
   getUserById(data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
-    return this.http.get(this.urlRoot + '/user/' + data, requestOptions);
+    return this.http.get(this.urlRoot + '/user/' + data, this.requestOptions);
   }
 
   getOldDataUser(data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
-    return this.http.get(this.urlRoot + '/user/' + data, requestOptions);
+    return this.http.get(this.urlRoot + '/user/' + data, this.requestOptions);
   }
 
   saveUser(data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
-    return this.http.post(this.urlRoot + '/user/create', data, requestOptions);
+    return this.http.post(
+      this.urlRoot + '/user/create',
+      data,
+      this.requestOptions
+    );
   }
 
   updateUser(userId: any, data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
     return this.http.put(
       this.urlRoot + '/user/' + userId,
       data,
-      requestOptions
+      this.requestOptions
     );
   }
 
   deleteUser(data: any) {
-    const headers = new HttpHeaders({
-      'app-id': '63033943889b3aab444829f0',
-    });
-    const requestOptions = { headers: headers };
-    return this.http.delete(this.urlRoot + '/user/' + data, requestOptions);
+    return this.http.delete(
+      this.urlRoot + '/user/' + data,
+      this.requestOptions
+    );
   }
 }

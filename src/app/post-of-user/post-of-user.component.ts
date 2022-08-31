@@ -11,7 +11,7 @@ import { find } from 'rxjs';
   styleUrls: ['./post-of-user.component.css'],
 })
 export class PostOfUserComponent implements OnInit {
-  users: any;
+  user: any;
   posts: any;
   post: any;
   ownerId: string = '';
@@ -33,7 +33,7 @@ export class PostOfUserComponent implements OnInit {
   // try get user by id
   getUserById(data: any) {
     this.userData.getUserById(this.ownerId).subscribe((result: any) => {
-      this.users = result;
+      this.user = result;
     });
   }
 

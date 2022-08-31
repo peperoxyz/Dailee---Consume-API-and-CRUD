@@ -25,6 +25,7 @@ export class UsersComponent implements OnInit {
     if (confirm('Are you sure you want to delete this user?')) {
       this.userData.deleteUser(data).subscribe((result: any) => {
         this.users = result.data;
+        this.router.navigate(['/user']);
       });
     }
   }

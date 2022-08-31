@@ -44,6 +44,11 @@
             class="w-full border-2 border-gray-300 p-2 rounded-md"
             placeholder="Update Your First Name"
           />
+          <small
+            *ngIf="submitted && f.firstName.errors?.['required']"
+            class="text-red-600"
+            >Text for your post is required.</small
+          >
         </div>
         <div>
           <label class="font-semibold text-slate-800 text-md" for="text">
@@ -55,6 +60,11 @@
             formControlName="lastName"
             placeholder="Update Your Last Name"
           />
+          <small
+            *ngIf="submitted && f.lastName.errors?.['required']"
+            class="text-red-600"
+            >Text for your post is required.</small
+          >
         </div>
       </div>
       <!-- <div>

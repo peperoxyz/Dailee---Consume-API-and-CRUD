@@ -11,7 +11,7 @@ import { UsersDataService } from '../services/users-data.service';
   styleUrls: ['./detail-posts.component.css'],
 })
 export class DetailPostsComponent implements OnInit {
-  postById: any;
+  post: any;
   detailPost: any;
   postId?: string | null;
   comments: any;
@@ -32,9 +32,9 @@ export class DetailPostsComponent implements OnInit {
     private router: Router
   ) {}
 
-  getPostById(data: any) {
+  getpost(data: any) {
     this.postData.getPosts().subscribe((result: any) => {
-      this.postById = result.data.find((x: any) => x.id == this.postId);
+      this.post = result.data.find((x: any) => x.id == this.postId);
     });
   }
 
@@ -59,7 +59,7 @@ export class DetailPostsComponent implements OnInit {
     if (confirm('Are you sure you want to delete this post?')) {
       this.postData.deletePost(postId).subscribe((result: any) => {
         this.users = result.data;
-        // this.router.navigate(['/user']);
+        this.router.navigate(['/']);
       });
     }
   }
@@ -71,26 +71,15 @@ export class DetailPostsComponent implements OnInit {
         this.comments = result.data;
       });
     this.getCommentsOfPost(this.postId);
-    // this.formCreateComment.reset();
-    // this.formCreateComment.patchValue({ post: this.postId });
     this.formCreateComment.get('message')?.reset();
+    this.formCreateComment.get('owner')?.reset();
   }
 
-  /**
-   * klik icon hati
-   * dapetin semua data post detail
-   * jadiin itu body di request update nya
-   * ambil likes, ubah ke number, tambahkan 1
-   * kirim ke server
-   */
-
   onLike() {
-    this.postById.likes = Number(this.postById.likes) + 1;
-    this.postData
-      .likePost(this.postId, this.postById)
-      .subscribe((result: any) => {
-        this.postById = result;
-      });
+    this.post.likes = Number(this.post.likes) + 1;
+    this.postData.likePost(this.postId, this.post).subscribe((result: any) => {
+      this.post = result;
+    });
   }
 
   ngOnInit(): void {
@@ -103,7 +92,7 @@ export class DetailPostsComponent implements OnInit {
     this.postId = String(routeParams.get('postId'));
     this.formCreateComment.patchValue({ post: this.postId });
     // load posts by id in param
-    this.getPostById(this.postId);
+    this.getpost(this.postId);
     this.getCommentsOfPost(this.postId);
     this.getComments();
   }

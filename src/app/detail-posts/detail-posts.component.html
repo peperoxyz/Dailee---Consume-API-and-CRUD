@@ -48,7 +48,7 @@
 >
   <div class="mx-auto space-y-5">
     <div
-      *ngIf="postById"
+      *ngIf="post"
       class="md:flex justify-center space-y-5 md:space-y-0 md:space-x-5"
     >
       <div>
@@ -56,22 +56,22 @@
           <div class="flex justify-between gap-3 mb-3 text-lg">
             <div class="flex gap-3">
               <img
-                [routerLink]="['/postOfUser', postById.owner.id]"
-                [src]="postById.owner.picture"
+                [routerLink]="['/postOfUser', post.owner.id]"
+                [src]="post.owner.picture"
                 class="w-12 h-12 rounded-full"
                 alt=""
               />
               <a class="">
                 <h1
-                  [routerLink]="['/postOfUser', postById.owner.id]"
+                  [routerLink]="['/postOfUser', post.owner.id]"
                   class="inline-block font-semibold cursor-pointer"
                 >
-                  {{ postById.owner.firstName }} {{ postById.owner.lastName }}
+                  {{ post.owner.firstName }} {{ post.owner.lastName }}
                 </h1>
                 <div class="flex gap-1">
                   <div
                     class="flex gap-1 text-xs text-white"
-                    *ngFor="let tag of postById.tags"
+                    *ngFor="let tag of post.tags"
                   >
                     <div class="bg-blue-400 rounded-sm px-2">{{ tag }}</div>
                   </div>
@@ -81,12 +81,12 @@
             <div class="flex">
               <a
                 [title]="'Edit Post'"
-                [routerLink]="['/updatePost/', postById.id]"
+                [routerLink]="['/updatePost/', post.id]"
                 class="text-2xl align text-white cursor-pointer"
                 >✒️</a
               >
               <a
-                (click)="onDelete(postById.id)"
+                (click)="onDelete(post.id)"
                 [title]="'Delete post'"
                 class="cursor-pointer text-xl"
                 >🗑️</a
@@ -94,20 +94,20 @@
             </div>
           </div>
           <div class="space-y-1">
-            <h1>{{ postById.text }}</h1>
+            <h1>{{ post.text }}</h1>
             <img
-              *ngIf="postById.image"
-              [src]="postById.image"
+              *ngIf="post.image"
+              [src]="post.image"
               class="w-full max-w-3xl h-full md:h-full rounded-md object-cover object-center"
               alt=""
             />
 
             <div class="space-x-1 pt-2">
               <span (click)="onLike()" class="text-xl font-bold text-blue-800">
-                {{ postById.likes
-                }}<a class="hover:text-2xl cursor-pointer">💗</a>
+                {{ post.likes
+                }}<button class="hover:text-2xl cursor-pointer">💗</button>
               </span>
-              <span  class="text-xl font-bold text-blue-800 cursor-pointer"
+              <span class="text-xl font-bold text-blue-800 cursor-pointer"
                 >🗨️</span
               >
             </div>
@@ -140,6 +140,7 @@
           class="w-full border-2 border-gray-300 p-2 rounded-md"
         ></textarea>
         <button
+        [disabled]="!formCreateComment.valid"
           type="submit"
           class="cursor-pointer text-blue-400 text-sm absolute -translate-x-11 translate-y-3"
         >
