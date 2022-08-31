@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostsDataService } from '../services/posts-data.service';
 import { UsersDataService } from '../services/users-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { find } from 'rxjs';
+import { Post, User } from '../models';
 
 @Component({
   selector: 'app-post-of-user',
@@ -11,9 +11,9 @@ import { find } from 'rxjs';
   styleUrls: ['./post-of-user.component.css'],
 })
 export class PostOfUserComponent implements OnInit {
-  user: any;
-  posts: any;
-  post: any;
+  user?: User;
+  posts: Post[] = [];
+  post?: Post;
   ownerId: string = '';
   postId: string = '';
 
@@ -50,12 +50,14 @@ export class PostOfUserComponent implements OnInit {
     this.router.navigate(['home/detailPost/' + data]);
   }
 
-  onLike(postId:any, data: any) {
+  onLike(postId: any, data: any) {
     this.post = data;
-    this.post.likes = Number(this.post.likes) + 1;
-    this.postData.likePost(postId, data).subscribe((result: any) => {
-      this.post = result;
-    })
+    if (this.post) {
+      this.post.likes = Number(this.post.likes) + 1;
+      this.postData.likePost(postId, data).subscribe((result: any) => {
+        this.post = result;
+      });
+    }
   }
 
   ngOnInit(): void {

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, Observable, pipe, throwError } from 'rxjs';
+import { User } from '../models';
 import { UsersDataService } from '../services/users-data.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { UsersDataService } from '../services/users-data.service';
   styleUrls: ['./create-user.component.css'],
 })
 export class CreateUserComponent implements OnInit {
-  users: any = {};
+  users: User[] = [];
 
   formCreateUser = new FormGroup({
     firstName: new FormControl('', Validators.required),

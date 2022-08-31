@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, pipe, throwError } from 'rxjs';
+import { Post, User } from '../models';
 import { PostsDataService } from '../services/posts-data.service';
 import { UsersDataService } from '../services/users-data.service';
 
@@ -18,8 +19,8 @@ import { UsersDataService } from '../services/users-data.service';
   styleUrls: ['./create-post.component.css'],
 })
 export class CreatePostComponent implements OnInit {
-  posts: any = {};
-  users: any = {};
+  posts: Post[] = [];
+  users: User[] = [];
   tags: string[] = [];
   ownerId: string = '';
   selectedTags: string[] = [];

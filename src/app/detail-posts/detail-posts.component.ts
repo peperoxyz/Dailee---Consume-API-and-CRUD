@@ -4,6 +4,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostsDataService } from '../services/posts-data.service';
 import { UsersDataService } from '../services/users-data.service';
+import { Post, User, Comment } from '../models';
 
 @Component({
   selector: 'app-detail-posts',
@@ -11,12 +12,11 @@ import { UsersDataService } from '../services/users-data.service';
   styleUrls: ['./detail-posts.component.css'],
 })
 export class DetailPostsComponent implements OnInit {
-  post: any;
-  detailPost: any;
+  post?: Post;
   postId?: string | null;
-  comments: any;
-  commentsByPost: any;
-  users: any;
+  comments: Comment[] = [];
+  commentsByPost: Comment[] =[];
+  users: User[]=[];
   ownerId: string = '';
 
   formCreateComment = new FormGroup({
@@ -76,10 +76,14 @@ export class DetailPostsComponent implements OnInit {
   }
 
   onLike() {
-    this.post.likes = Number(this.post.likes) + 1;
-    this.postData.likePost(this.postId, this.post).subscribe((result: any) => {
-      this.post = result;
-    });
+    if (this.post) {
+      this.post.likes = Number(this.post.likes) + 1;
+      this.postData
+        .likePost(this.postId, this.post)
+        .subscribe((result: any) => {
+          this.post = result;
+        });
+    }
   }
 
   ngOnInit(): void {

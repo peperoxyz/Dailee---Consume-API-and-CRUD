@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, pipe, throwError } from 'rxjs';
 import { PostsDataService } from '../services/posts-data.service';
+import { Post } from '../models';
 
 @Component({
   selector: 'app-post',
@@ -10,9 +11,9 @@ import { PostsDataService } from '../services/posts-data.service';
   styleUrls: ['./post.component.css'],
 })
 export class PostComponent implements OnInit {
-  post: any;
-  posts: any;
-  commentsByPost: any;
+  post?: Post;
+  posts: Post[] = [];
+  commentsByPost: Comment[] = [];
   postId?: string | null;
   constructor(private postData: PostsDataService, private router: Router) {}
 
@@ -29,10 +30,12 @@ export class PostComponent implements OnInit {
 
   onLike(postId: any, data: any) {
     this.post = data;
-    this.post.likes = Number(this.post.likes) + 1;
-    this.postData.likePost(postId, data).subscribe((result: any) => {
-      this.post = result;
-    });
+    if (this.post) {
+      this.post.likes = Number(this.post.likes) + 1;
+      this.postData.likePost(postId, data).subscribe((result: any) => {
+        this.post = result;
+      });
+    }
   }
 
   onDelete(data: any) {
@@ -40,7 +43,7 @@ export class PostComponent implements OnInit {
       this.postData.deletePost(data).subscribe((result: any) => {
         this.posts = result.data;
         this.postData.getPosts();
-        window.location.reload()
+        window.location.reload();
       });
     }
   }

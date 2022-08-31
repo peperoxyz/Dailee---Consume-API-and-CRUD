@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, pipe, throwError } from 'rxjs';
+import { Post } from '../models';
 import { PostsDataService } from '../services/posts-data.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { PostsDataService } from '../services/posts-data.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  posts: any;
+  posts: Post[] = [];
   constructor(private postData: PostsDataService, private router: Router) {}
 
   onDelete(data: any) {

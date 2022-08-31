@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Post, User } from '../models';
 import { PostsDataService } from '../services/posts-data.service';
 import { UsersDataService } from '../services/users-data.service';
 
@@ -12,8 +13,8 @@ import { UsersDataService } from '../services/users-data.service';
 export class UpdatePostComponent implements OnInit {
   postId: any;
   oldData: any = {};
-  posts: any;
-  users: any;
+  posts: Post[] = [];
+  users: User[] = [];
   tags: string[] = [];
   foo: any;
   bar: any;
@@ -60,8 +61,6 @@ export class UpdatePostComponent implements OnInit {
     this.formUpdatePost.controls['tags'].patchValue(this.selectedTags);
     this.foo = this.formUpdatePost.value.tags;
   }
-
-
 
   onSubmit() {
     this.postData
