@@ -10,6 +10,7 @@ import { PostsDataService } from '../services/posts-data.service';
   styleUrls: ['./post.component.css'],
 })
 export class PostComponent implements OnInit {
+  post: any;
   posts: any;
   commentsByPost: any;
   postId?: string | null;
@@ -18,6 +19,19 @@ export class PostComponent implements OnInit {
   getCommentsOfPost(data: any) {
     this.postData.getCommentsOfPost(this.postId).subscribe((result: any) => {
       this.commentsByPost = result.data;
+    });
+  }
+
+  /**
+   *
+   *
+   */
+
+  onLike(postId: any, data: any) {
+    this.post = data;
+    this.post.likes = Number(this.post.likes) + 1;
+    this.postData.likePost(postId, data).subscribe((result: any) => {
+      this.post = result;
     });
   }
 

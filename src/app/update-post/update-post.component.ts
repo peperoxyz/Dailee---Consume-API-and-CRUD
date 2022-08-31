@@ -47,6 +47,14 @@ export class UpdatePostComponent implements OnInit {
     });
   }
 
+  /**
+   * klik icon hati
+   * dapetin semua data post detail
+   * jadiin itu body di request update nya
+   * ambil likes, ubah ke number, tambahkan 1, kembalikan ke string
+   * kirim ke server
+   */
+
   addToTag(selectedTag: string) {
     this.selectedTags.push(selectedTag);
     this.formUpdatePost.controls['tags'].patchValue(this.selectedTags);

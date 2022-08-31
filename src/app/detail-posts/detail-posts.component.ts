@@ -12,6 +12,7 @@ import { UsersDataService } from '../services/users-data.service';
 })
 export class DetailPostsComponent implements OnInit {
   postById: any;
+  detailPost: any;
   postId?: string | null;
   comments: any;
   commentsByPost: any;
@@ -43,7 +44,6 @@ export class DetailPostsComponent implements OnInit {
     });
   }
 
-
   getCommentsOfPost(data: any) {
     this.postData.getCommentsOfPost(this.postId).subscribe((result: any) => {
       this.commentsByPost = result.data;
@@ -61,8 +61,6 @@ export class DetailPostsComponent implements OnInit {
         this.users = result.data;
         // this.router.navigate(['/user']);
       });
-    } else {
-      // this.router.navigate(['/user']);
     }
   }
 
@@ -76,6 +74,23 @@ export class DetailPostsComponent implements OnInit {
     // this.formCreateComment.reset();
     // this.formCreateComment.patchValue({ post: this.postId });
     this.formCreateComment.get('message')?.reset();
+  }
+
+  /**
+   * klik icon hati
+   * dapetin semua data post detail
+   * jadiin itu body di request update nya
+   * ambil likes, ubah ke number, tambahkan 1
+   * kirim ke server
+   */
+
+  onLike() {
+    this.postById.likes = Number(this.postById.likes) + 1;
+    this.postData
+      .likePost(this.postId, this.postById)
+      .subscribe((result: any) => {
+        this.postById = result;
+      });
   }
 
   ngOnInit(): void {

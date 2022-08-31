@@ -77,7 +77,7 @@
     <div class="bg-white shadow-md p-5 rounded-lg">
       <div class="flex justify-between gap-3 mb-3 text-lg">
         <div class="flex gap-3">
-          <img [src]="post.owner.picture" class="w-12 rounded-full" alt="" />
+          <img [src]="post.owner.picture" class="w-12 h-12 rounded-full" alt="" />
           <a class="">
             <h1 class="inline-block font-semibold">
               {{ post.owner.firstName }} {{ post.owner.lastName }}
@@ -110,12 +110,12 @@
           alt=""
         />
 
-        <div class="text-3xl">
-          <span class="text-sm font-bold text-blue-800">
-            {{ post.likes }}💗</span
-          >
-          <span class="text-sm font-bold text-blue-800"
-            >{{ post.likes }} 🗨️</span
+        <div class="space-x-1 pt-2">
+          <span class="text-xl font-bold text-blue-800">
+            {{ post.likes }}<a (click)="onLike(post.id, post)" class="hover:text-2xl cursor-pointer">💗</a>
+          </span>
+          <span [routerLink]="['detailPost/', post.id]" class="text-xl font-bold text-blue-800 cursor-pointer"
+            >🗨️</span
           >
         </div>
       </div>

@@ -5,11 +5,12 @@
     <div class="bg-white shadow-md p-5 rounded-lg">
       <div class="flex justify-between gap-3 mb-3 text-lg">
         <div class="flex gap-3">
-          <img [src]="post.owner.picture" class="w-12 rounded-full" alt="" />
+          <img
+            [src]="post.owner.picture"
+            class="w-12 h-12 rounded-full"
+            alt=""
+          />
           <a class="">
-            <!-- <h1 class="inline-block uppercase font-bold text-pink-500 mr-2">
-              {{ post.owner.title }}
-            </h1> -->
             <h1
               class="inline-block font-semibold cursor-pointer"
               [routerLink]="['postOfUser/', post.owner.id]"
@@ -28,12 +29,15 @@
         </div>
         <div class="flex">
           <span
-          [title]="'See Details'"
+            [title]="'See Details'"
             [routerLink]="['detailPost/', post.id]"
             class="text-xl cursor-pointer"
             >➡️</span
           >
-          <span [title]="'Delete post'" (click)="onDelete(post.id)" class="text-xl cursor-pointer"
+          <span
+            [title]="'Delete post'"
+            (click)="onDelete(post.id)"
+            class="text-xl cursor-pointer"
             >🗑️</span
           >
         </div>
@@ -47,17 +51,15 @@
           alt=""
         />
 
-        <div class="text-3xl">
-          <span class="text-sm font-bold text-blue-800">
-            {{ post.likes }}💗</span
-          >
-          <span class="text-sm font-bold text-blue-800"
-            >{{ post.likes }} 🗨️</span
+        <div class="space-x-1 pt-2">
+          <span class="text-xl font-bold text-blue-800">
+            {{ post.likes }}<a (click)="onLike(post.id, post)" class="hover:text-2xl cursor-pointer">💗</a>
+          </span>
+          <span [routerLink]="['detailPost/', post.id]" class="text-xl font-bold text-blue-800"
+            >🗨️</span
           >
         </div>
       </div>
     </div>
   </div>
 </section>
-
-

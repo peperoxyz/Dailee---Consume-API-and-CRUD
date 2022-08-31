@@ -58,7 +58,7 @@
               <img
                 [routerLink]="['/postOfUser', postById.owner.id]"
                 [src]="postById.owner.picture"
-                class="w-12 rounded-full"
+                class="w-12 h-12 rounded-full"
                 alt=""
               />
               <a class="">
@@ -102,12 +102,13 @@
               alt=""
             />
 
-            <div class="text-3xl">
-              <span class="text-sm font-bold text-blue-800">
-                {{ postById.likes }}💗</span
-              >
-              <span class="text-sm font-bold text-blue-800"
-                >{{ postById.likes }} 🗨️</span
+            <div class="space-x-1 pt-2">
+              <span (click)="onLike()" class="text-xl font-bold text-blue-800">
+                {{ postById.likes
+                }}<a class="hover:text-2xl cursor-pointer">💗</a>
+              </span>
+              <span  class="text-xl font-bold text-blue-800 cursor-pointer"
+                >🗨️</span
               >
             </div>
           </div>
@@ -116,37 +117,19 @@
     </div>
   </div>
   <div class="mx-auto mt-3 md:mt-0 w-full md:w-96 md:px-8 space-y-5">
-    <div *ngFor="let comment of commentsByPost">
-      <div class="bg-white mb-2 p-3 rounded-lg shadow-sm">
-        <div class="flex gap-2">
-          <img
-            [routerLink]="['/postOfUser/', comment.owner.id]"
-            [src]="comment.owner.picture"
-            class="rounded-full h-5 w-5"
-            alt=""
-          />
-          <span
-            class="font-bold text-xs cursor-pointer"
-            [routerLink]="['/postOfUser/', comment.owner.id]"
-            >{{ comment.owner.firstName }} {{ comment.owner.lastName }}</span
-          >
-        </div>
-        <div class="ml-7 text-sm">{{ comment.message }}</div>
-      </div>
-    </div>
-    <hr />
     <!-- select user -->
     <div class="grid grid-cols-2 gap-2">
       <a *ngFor="let user of users" class="">
         <h1
           (click)="selectedUser(user.id)"
-          class="text-sm px-3 py-3 bg-blue-100 hover:bg-blue-400 hover:text-white text-center rounded-full"
+          class="text-xs px-3 py-3 bg-blue-100 hover:bg-blue-400 hover:text-white text-center rounded-full"
         >
           {{ user.firstName }} {{ user.lastName }}
         </h1>
       </a>
     </div>
-    <!-- select user -->
+
+    <!-- Create comment -->
     <div class="mt-2 relative">
       <form [formGroup]="formCreateComment" (ngSubmit)="onSubmit()">
         <label class="font-semibold text-slate-800 text-md" for="text"> </label>
@@ -163,6 +146,25 @@
           Send
         </button>
       </form>
+    </div>
+    <hr />
+    <div *ngFor="let comment of commentsByPost">
+      <div class="bg-white mb-2 p-3 rounded-lg shadow-sm">
+        <div class="flex gap-2">
+          <img
+            [routerLink]="['/postOfUser/', comment.owner.id]"
+            [src]="comment.owner.picture"
+            class="rounded-full h-5 w-5"
+            alt=""
+          />
+          <span
+            class="font-bold text-sm cursor-pointer"
+            [routerLink]="['/postOfUser/', comment.owner.id]"
+            >{{ comment.owner.firstName }} {{ comment.owner.lastName }}</span
+          >
+        </div>
+        <div class="ml-7 text-sm">{{ comment.message }}</div>
+      </div>
     </div>
   </div>
 </section>

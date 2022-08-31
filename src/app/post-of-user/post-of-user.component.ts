@@ -13,6 +13,7 @@ import { find } from 'rxjs';
 export class PostOfUserComponent implements OnInit {
   users: any;
   posts: any;
+  post: any;
   ownerId: string = '';
   postId: string = '';
 
@@ -49,6 +50,13 @@ export class PostOfUserComponent implements OnInit {
     this.router.navigate(['home/detailPost/' + data]);
   }
 
+  onLike(postId:any, data: any) {
+    this.post = data;
+    this.post.likes = Number(this.post.likes) + 1;
+    this.postData.likePost(postId, data).subscribe((result: any) => {
+      this.post = result;
+    })
+  }
 
   ngOnInit(): void {
     // Get the user id from the current route

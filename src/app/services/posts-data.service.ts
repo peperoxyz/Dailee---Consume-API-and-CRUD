@@ -67,6 +67,18 @@ export class PostsDataService {
     );
   }
 
+  likePost(postId: any, data: any) {
+    const headers = new HttpHeaders({
+      'app-id': '63033943889b3aab444829f0',
+    });
+    const requestOptions = { headers: headers };
+    return this.http.put(
+      this.urlRoot + '/post/' + postId,
+      data,
+      requestOptions
+    );
+  }
+
   saveComment(data: any) {
     const headers = new HttpHeaders({
       'app-id': '63033943889b3aab444829f0',
@@ -78,15 +90,6 @@ export class PostsDataService {
       requestOptions
     );
   }
-
-  // updateLikes(postId: any, data: any) {
-  //   const headers = new HttpHeaders({
-  //     'app-id': '63033943889b3aab444829f0',
-  //   });
-  //   const requestOptions = { headers: headers };
-  //   return this.http.put(this.urlRoot + '/post/' + postId, data, requestOptions
-  //   );
-  // }
 
   deletePost(data: any) {
     const headers = new HttpHeaders({
